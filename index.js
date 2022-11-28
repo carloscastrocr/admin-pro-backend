@@ -10,18 +10,19 @@ const app = express();
 // Configurar cors
 app.use(cors())
 
+//Lectura y parseo del Body 
+//"midelware: funciones que se ejecutan antes de llegar a otras"
+//Una funcion de los midelware es que la informacion llegue como la esperamos
+app.use( express.json());
+
 //Base de datos
 dbConnection();
 
-//OYc5qgOtS4MZv40s
-//mean-user
 //Rutas
-app.get('/',(req, res)=>{
-    res.status(400).json({
-        ok:true,
-        msg: 'Hola Mundo'
-    })
-})
+//midelware
+app.use('/api/usuarios', require('./routes/usuarios.routes'));
+app.use('/api/login', require('./routes/auth.routes'));
+
 
 app.listen( process.env.PORT, () => {
    console.log('Servidor corriendo en puerto ' + process.env.PORT);
