@@ -6,11 +6,26 @@ const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req, res) => {
 
-    const usuarios = await Usuario.find({}, 'nombre email role google');
+    const desde = Number(req.query.desde) || 0;
+
+   /* const usuarios = await Usuario.find({}, 'nombre email role google')
+                                  .skip( desde )
+                                  .limit(5);
+    //con moongoos
+    const total = await Usuario.count()*/
+
+    // Con una funcion de javascript
+    const [usuarios, total] = await Promise.all([
+                                             Usuario.find({}, 'nombre email role google img')
+                                                    .skip( desde )
+                                                    .limit(5),
+                                             Usuario.countDocuments()                         
+                                    ])
 
     res.json({
         ok: true,
         usuarios,
+        total,
         uid: req.uid
     })
 }
