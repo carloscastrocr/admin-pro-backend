@@ -14,6 +14,9 @@ async function googleVerify(token) {
   //const userid = payload['sub'];
   // If request specified a G Suite domain:
   // const domain = payload['hd'];
+
+ /* const {name, email, picture}=payload;
+  return {name, email, picture}*/
   return payload;
 }
 //googleVerify().catch(console.error);
