@@ -10,6 +10,9 @@ const app = express();
 // Configurar cors
 app.use(cors())
 
+// Carpeta publica
+app.use( express.static('public'))
+
 //Lectura y parseo del Body 
 //"midelware: funciones que se ejecutan antes de llegar a otras"
 //Una funcion de los midelware es que la informacion llegue como la esperamos
